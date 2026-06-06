@@ -1,29 +1,27 @@
-import { useState, useMemo, useEffect } from "react";
-import PropTypes from "prop-types";
+import { useState, useMemo, useEffect } from 'react';
+import PropTypes from 'prop-types';
 
-import CartContext from "./CartContext";
+import CartContext from './CartContext';
 
 function CartProvider({ children }) {
+  const [cart, setCart] = useState(
+    JSON.parse(localStorage.getItem('esCart')) || [],
+  );
+  const value = useMemo(() => [cart, setCart], [cart]);
 
-    const [cart, setCart] = useState(
-        JSON.parse(localStorage.getItem('esCart')) || []
-    )
+  useEffect(() => {
+    localStorage.setItem('esCart', JSON.stringify(cart));
+  }, [cart]);
 
-    const value = useMemo(() => [cart, setCart], [cart])
-
-    useEffect(() => {
-        localStorage.setItem('esCart', JSON.stringify(cart))
-    }, [cart])
-
-    return <CartContext.Provider value={value}>{children}</CartContext.Provider>
+  return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 }
 
-CartProvider.prototype = {
-    children: PropTypes.node,
-}
+CartProvider.propTypes = {
+  children: PropTypes.node,
+};
 
-CartProvider.defaultProps = {
-    children: <div>Cart Provider</div>
-}
+// CartProvider.defaultProps = {
+//   children: <div>CartProvider</div>,
+// };
 
-export default CartProvider
+export default CartProvider;
