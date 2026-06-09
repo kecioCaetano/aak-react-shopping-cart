@@ -29,6 +29,8 @@ function RouteSwitch() {
         <Routes>
           <Route index path="/" element={<HomePage />} />
           <Route path="/cart" element={<CartPage />} />
+
+
           {/* <Route element={<ProductGalleryLayout />}>
             <Route
               index
@@ -43,8 +45,10 @@ function RouteSwitch() {
               path="/products/sunglasses"
               element={<ProductGallery categoryType="sunglasses" />}
             />
-          </Route>
-          <Route element={<ProductPageLayout />}>
+          </Route> */}
+
+
+          {/* <Route element={<ProductPageLayout />}>
             <Route
               path="/products/eyeglasses/:productId"
               element={<ProductPage />}
@@ -56,6 +60,8 @@ function RouteSwitch() {
           </Route>
           <Route path="/about" element={<AboutPage />} />
           <Route path="*" element={<UnderConstruction />} /> */}
+
+
         </Routes>
         <Footer />
       </CartProvider>
