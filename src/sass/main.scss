@@ -17,11 +17,11 @@
 @use "home_page/featured-products";
 
 // // PRODUCT GALLERY COMPONENTS
-// @use 'product_gallery/product-banner';
-// @use 'product_gallery/sidebar';
-// @use 'product_gallery/product-gallery-layout';
-// @use 'product_gallery/product-card';
-// @use 'product_gallery/pagination';
+@use "product_gallery/product-banner";
+@use "product_gallery/sidebar";
+@use "product_gallery/product-gallery-layout";
+@use "product_gallery/product-card";
+@use "product_gallery/pagination";
 
 // // PRODUCT PAGE COMPONENT
 // @use 'product_page/product-page';

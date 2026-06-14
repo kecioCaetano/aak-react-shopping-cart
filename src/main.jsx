@@ -9,7 +9,7 @@ import CartProvider from './context/CartProvider';
 import Header from './components/Header';
 import Footer from './components/Footer';
 
-// import ProductGallery from './components/ProductGallery';
+import ProductGallery from './components/ProductGallery';
 import ProductGalleryLayout from './layout/ProductGalleryLayout';
 // import ProductPageLayout from './layout/ProductPageLayout';
 
@@ -32,12 +32,12 @@ function RouteSwitch() {
 
 
           <Route element={<ProductGalleryLayout />}>
-            {/* <Route
+            <Route
               index
               path="/products"
               element={<ProductGallery categoryType="allProducts" />}
             />
-            <Route
+            {/* <Route
               path="/products/eyeglasses"
               element={<ProductGallery categoryType="eyeglasses" />}
             />
