@@ -11,7 +11,7 @@ import Footer from './components/Footer';
 
 import ProductGallery from './components/ProductGallery';
 import ProductGalleryLayout from './layout/ProductGalleryLayout';
-// import ProductPageLayout from './layout/ProductPageLayout';
+import ProductPageLayout from './layout/ProductPageLayout';
 
 import HomePage from './pages/HomePage';
 // import ProductPage from './pages/ProductPage';
@@ -37,18 +37,18 @@ function RouteSwitch() {
               path="/products"
               element={<ProductGallery categoryType="allProducts" />}
             />
-            {/* <Route
+            <Route
               path="/products/eyeglasses"
               element={<ProductGallery categoryType="eyeglasses" />}
             />
             <Route
               path="/products/sunglasses"
               element={<ProductGallery categoryType="sunglasses" />}
-            /> */}
+            />
           </Route>
 
 
-          {/* <Route element={<ProductPageLayout />}>
+          <Route element={<ProductPageLayout />}>
             <Route
               path="/products/eyeglasses/:productId"
               element={<ProductPage />}
@@ -58,7 +58,7 @@ function RouteSwitch() {
               element={<ProductPage />}
             />
           </Route>
-          <Route path="/about" element={<AboutPage />} />
+          {/* <Route path="/about" element={<AboutPage />} />
           <Route path="*" element={<UnderConstruction />} /> */}
 
 
