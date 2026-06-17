@@ -61,10 +61,53 @@ function ProductPage() {
         setTimeout(() => setErrorMessage(''), 7500)
     }, [errorMessage])
 
-    // const handleDesiredQty
-    // const updateQuantity
-    // const addNewItem
-    // const addToCart
+    const handleDesiredQty = (e) => {
+        setDesiredQty(() => e.target.value)
+    }
+
+    const updateQuantity = () => {
+        setCartItems(() => {
+            cartItems.map((cartItem) => {
+                if (cartItem.itemId !== productId) return cartItem
+
+                return {
+                    ...cartItem,
+                    quantity: cartItem.quantity + desiredQty
+                }
+            })
+        })
+    }
+    const addNewItem = () => {
+        setCartItems(() => [
+            ...cartItems, {
+                itemId: productId,
+                quantity: desiredQty
+            }
+        ])
+    }
+    const addToCart = (e) => {
+        e.preventDefault()
+        const checkedItem = cartItems.find((ci) => ci.itemId === productId)
+        let newQuantity = 0
+
+        if (itemInCart) newQuantity = +checkedItem.quantity + +desiredQty
+
+        if (desiredQty > product.quantity || (itemInCart && newQuantity > product.quantity)) {
+            setErrorMessage(ERROR_MESSAGE);
+            return;
+        }
+
+        // Update quantity if new quantity is valid
+        if (itemInCart && newQuantity <= product.quantity) {
+            updateQuantity();
+            return;
+        }
+
+        // If no match in cart and quantity is valid, add new item
+        addNewItem();
+        setDesiredQty(1);
+        setErrorMessage('');
+    }
 
     return (
         <>
@@ -173,7 +216,36 @@ function ProductPage() {
                     </div>
                 </section>
             </main >
-            <section>b</section>
+            <section className="pd-lens">
+                <h2 className="pd-lens__title">Purchase Prescription Lenses</h2>
+                <ul className="pd-lens__steps">
+                    <li className="pd-lens__step">
+                        <span className="pd-lens__count">1</span>
+                        <p className="pd-lens__instruction">
+                            Purchase the frame (Optical or Sunglasses) you wish to have a
+                            prescription. Skip this step if you wish to add a prescription to
+                            a frame you already have.
+                        </p>
+                    </li>
+                    <li className="pd-lens__step">
+                        <span className="pd-lens__count">2</span>
+                        <p className="pd-lens__instruction">
+                            Schedule an appointment through our website or contact us through
+                            our telephone number. A SAVANT Eyewear representative will reach
+                            out to confirm your appointment.
+                        </p>
+                    </li>
+                    <li className="pd-lens__step">
+                        <span className="pd-lens__count">3</span>
+                        <p className="pd-lens__instruction">
+                            Attend your scheduled appointment and have your order for
+                            prescription lenses finalized. Once finalized, your frame will be
+                            delivered to your address.
+                        </p>
+                    </li>
+                </ul>
+                <ScrollToTop />
+            </section>
         </>
     )
 }
