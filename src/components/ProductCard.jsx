@@ -72,24 +72,24 @@ ProductCard.propTypes = {
     }),
 };
 
-ProductCard.defaultProps = {
-    content: {
-        title: 'Product X',
-        price: '1000000',
-        originalPrice: '1000000',
-        description:
-            'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dignissimos inventore, error incidunt nemo, explicabo ',
-        technicalDetails: ['Detail 1', 'Detail 2', 'Detail 3'],
-        type: 'Type 1',
-        color: 'Color 1',
-        quantity: 0,
-        onSale: false,
-        id: 'abcde123',
-        images: {
-            main: null,
-            side: null,
-        },
-    },
-};
+// ProductCard.defaultProps = {
+//     content: {
+//         title: 'Product X',
+//         price: '1000000',
+//         originalPrice: '1000000',
+//         description:
+//             'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dignissimos inventore, error incidunt nemo, explicabo ',
+//         technicalDetails: ['Detail 1', 'Detail 2', 'Detail 3'],
+//         type: 'Type 1',
+//         color: 'Color 1',
+//         quantity: 0,
+//         onSale: false,
+//         id: 'abcde123',
+//         images: {
+//             main: null,
+//             side: null,
+//         },
+//     },
+// };
 
 export default ProductCard

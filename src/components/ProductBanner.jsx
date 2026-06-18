@@ -32,13 +32,13 @@ ProductBanner.propTypes = {
     }),
 };
 
-ProductBanner.defaultProps = {
-    content: {
-        title: 'Shop',
-        description:
-            'Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque odit necessitatibus veritatis deserunt et eum eius pariatur earum quaerat quod.',
-        img: '',
-        imgAlt: 'Placeholder banner image for collection',
-    },
-};
+// ProductBanner.defaultProps = {
+//     content: {
+//         title: 'Shop',
+//         description:
+//             'Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque odit necessitatibus veritatis deserunt et eum eius pariatur earum quaerat quod.',
+//         img: '',
+//         imgAlt: 'Placeholder banner image for collection',
+//     },
+// };
 export default ProductBanner

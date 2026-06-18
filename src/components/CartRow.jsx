@@ -8,9 +8,9 @@ import CartContext from "../context/CartContext";
 
 function CartRow(props) {
     const { product } = props
-    const { cart, setCart } = useContext(CartContext)
+    const [cart, setCart] = useContext(CartContext)
 
-    const currentProductInCart = cart.find((item) => item.id === product.id)
+    const currentProductInCart = cart.find((item) => item.itemId === product.id)
     const desiredQuantity = currentProductInCart.quantity
     const totalPrice = desiredQuantity * parsePrice(product.price)
 
@@ -106,7 +106,7 @@ function CartRow(props) {
 
 }
 
-CartRow.prototype = {
+CartRow.propTypes = {
     product: PropTypes.shape({
         title: PropTypes.string.isRequired,
         price: PropTypes.string.isRequired,

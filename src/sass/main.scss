@@ -24,11 +24,11 @@
 @use "product_gallery/pagination";
 
 // // PRODUCT PAGE COMPONENT
-// @use 'product_page/product-page';
+@use "product_page/product-page";
 
 // // CART PAGE COMPONENTS
-// @use 'cart_page/cart-page';
-// @use 'cart_page/cart-row';
+@use "cart_page/cart-page";
+@use "cart_page/cart-row";
 
 // // ABOUT PAGE COMPONENTS
 // @use 'about_page/story';

@@ -1,12 +1,13 @@
-import { useState, useEffect, useContext } from "react";
-import { Link, useParams } from 'react-router-dom'
-import { motion } from 'framer-motion'
+import { useState, useEffect, useContext } from 'react';
+import { Link, useParams } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
-import CartContext from "../context/CartContext";
-import ImageWrapper from "../components/ImageWrapper";
-import ScrollToTop from "../components/ScrollToTop";
+import CartContext from '../context/CartContext';
 
-import { allProductsData } from "../data/productData";
+import ImageWrapper from '../components/ImageWrapper';
+import ScrollToTop from '../components/ScrollToTop';
+
+import { allProductsData } from '../data/productData';
 
 const emptyProduct = {
     id: '',
@@ -22,83 +23,89 @@ const emptyProduct = {
     onSale: '',
     images: {
         main: '',
-        side: ''
-    }
-}
+        side: '',
+    },
+};
 
 function ProductPage() {
-    const { productId } = useParams()
+    const { productId } = useParams();
 
-    const { cartItems, setCartItems } = useContext(CartContext)
+    const [cartItems, setCartItems] = useContext(CartContext);
 
-    const [product, setProduct] = useState(emptyProduct)
-    const [activeImg, setActiveImg] = useState(1)
-    const [desiredQty, setDesiredQty] = useState(1)
-    const [errorMessage, setErrorMessage] = useState('')
-    const [itemInCart, setItemInCart] = useState(false)
+    const [product, setProduct] = useState(emptyProduct);
+    const [activeImg, setActiveImg] = useState(1);
+    const [desiredQty, setDesiredQty] = useState(1);
+    const [errorMessage, setErrorMessage] = useState('');
+    const [itemIsInCart, setInCart] = useState(false);
 
-    const increment = () => setDesiredQty((prev) => Math.min(prev + 1, product.quantity))
-    const decrement = () => setDesiredQty((prev) => Math.max(1, prev - 1))
+    const increment = () => setDesiredQty((prev) => Math.min(prev + 1, product.quantity));
+    const decrement = () => setDesiredQty((prev) => Math.max(1, prev - 1));
 
-    const ERROR_MESSAGE = 'We do not have enough stocks for your current order. ' +
-        'Contact us directly to get more information'
-
-    useEffect(() => {
-        document.title = `${product.title.toUpperCase()} | Savant eyewear online store.`
-    }, [product.title])
+    const ERROR_MESSAGE =
+        'We do not have enough stocks for your current order. Contact us directly to get more information';
 
     useEffect(() => {
-        const target = allProductsData.find((p) => p.id === productId)
-        setProduct(() => target || emptyProduct)
-    }, [productId])
+        document.title = `${product.title.toUpperCase()} | SAVANT Eyewear Online Store`;
+    }, [product.title]);
 
     useEffect(() => {
-        const isInCart = cartItems.find((ci) => ci.itemId === productId)
-        if (isInCart) setItemInCart(true)
-    }, [cartItems, productId])
+        const target = allProductsData.find((p) => p.id === productId);
+
+        setProduct(() => target || emptyProduct);
+    }, [productId]);
 
     useEffect(() => {
-        setTimeout(() => setErrorMessage(''), 7500)
-    }, [errorMessage])
+        const isInCart = cartItems.find((ci) => ci.itemId === productId);
+
+        if (isInCart) setInCart(true);
+    }, [cartItems, productId]);
+
+    useEffect(() => {
+        setTimeout(() => setErrorMessage(''), 7500);
+    }, [errorMessage]);
 
     const handleDesiredQty = (e) => {
-        setDesiredQty(() => e.target.value)
-    }
+        setDesiredQty(() => e.target.value);
+    };
 
     const updateQuantity = () => {
-        setCartItems(() => {
+        setCartItems(() =>
             cartItems.map((cartItem) => {
-                if (cartItem.itemId !== productId) return cartItem
+                if (cartItem.itemId !== productId) return cartItem;
 
                 return {
                     ...cartItem,
-                    quantity: cartItem.quantity + desiredQty
-                }
-            })
-        })
-    }
-    const addNewItem = () => {
+                    quantity: cartItem.quantity + desiredQty,
+                };
+            }),
+        );
+    };
+
+    const addNewItem = () =>
         setCartItems(() => [
-            ...cartItems, {
+            ...cartItems,
+            {
                 itemId: productId,
-                quantity: desiredQty
-            }
-        ])
-    }
+                quantity: desiredQty,
+            },
+        ]);
+
     const addToCart = (e) => {
-        e.preventDefault()
-        const checkedItem = cartItems.find((ci) => ci.itemId === productId)
-        let newQuantity = 0
+        e.preventDefault();
 
-        if (itemInCart) newQuantity = +checkedItem.quantity + +desiredQty
+        const checkedItem = cartItems.find((ci) => ci.itemId === productId);
+        let newQuantity = 0;
 
-        if (desiredQty > product.quantity || (itemInCart && newQuantity > product.quantity)) {
+        if (itemIsInCart) newQuantity = +checkedItem.quantity + +desiredQty;
+
+        // Validation for new quantity
+        if (desiredQty > product.quantity || (itemIsInCart && newQuantity > product.quantity)) {
             setErrorMessage(ERROR_MESSAGE);
             return;
         }
 
         // Update quantity if new quantity is valid
-        if (itemInCart && newQuantity <= product.quantity) {
+        if (itemIsInCart && newQuantity <= product.quantity) {
             updateQuantity();
             return;
         }
@@ -107,29 +114,43 @@ function ProductPage() {
         addNewItem();
         setDesiredQty(1);
         setErrorMessage('');
-    }
+    };
 
     return (
         <>
             <main className="pd-pg">
                 <section className="pd-pg__img--container">
                     <nav className="pd-pg__nav">
-                        <Link to="/" className="pd-pg__nav-link">HOME</Link>
-                        {' '}/
-                        {
-                            product.type === 'sunnies'
-                                ? (<Link to='/products/sunglasses' className="pd-pg__nav-link">Sunglasses</Link>)
-                                : (<Link to='/products/eyeglasses' className="pd-pg__nav-link">Eyeglasses</Link>)
-                        }{' '}/
-                        <span className="pd-pg__nav-link">{product.brand}</span>
+                        <Link to="/" className="pd-pg__nav-link">
+                            HOME
+                        </Link>{' '}
+                        /
+                        {product.type === 'sunnies' ? (
+                            <Link to="/products/sunglasses" className="pd-pg__nav-link">
+                                Sunglasses
+                            </Link>
+                        ) : (
+                            <Link to="/products/eyeglasses" className="pd-pg__nav-link">
+                                Eyeglasses
+                            </Link>
+                        )}{' '}
+                        /<span className="pd-pg__nav-link">{product.brand}</span>
                     </nav>
                     <div className="pd-pg__img--wrapper">
                         <ImageWrapper>
-                            {
-                                activeImg === 1
-                                    ? (<img src={product.img.main} alt={`${product.tile} front view`} className="pd-pg__active-img" />)
-                                    : (<img src={product.images.side} alt={`${product.title} side view`} className="pd-pg__active-img" />)
-                            }
+                            {activeImg === 1 ? (
+                                <img
+                                    src={product.images.main}
+                                    alt={`${product.title} front view`}
+                                    className="pd-pg__active-img"
+                                />
+                            ) : (
+                                <img
+                                    src={product.images.side}
+                                    alt={`${product.title} side view`}
+                                    className="pd-pg__active-img"
+                                />
+                            )}
                         </ImageWrapper>
                         <div className="pd-pg__img-thumbs">
                             <button
@@ -156,10 +177,9 @@ function ProductPage() {
                                     className="pd-pg__img-thumbnail"
                                 />
                             </button>
-
                         </div>
                     </div>
-                </section >
+                </section>
                 <section className="pd-pg__details--container">
                     <h1 className="pd-pg__title">{product.title}</h1>
                     <div className="pd-pg__price--wrapper">
@@ -172,7 +192,9 @@ function ProductPage() {
                         <p className="pd-pg__description">{product.description}</p>
                         <ul className="pd-pg__tech-details">
                             {product.technicalDetails.map((td) => (
-                                <li className="pd-pg__tech-detail" key={td}>{td}</li>
+                                <li className="pd-pg__tech-detail" key={td}>
+                                    {td}
+                                </li>
                             ))}
                         </ul>
                     </div>
@@ -187,25 +209,62 @@ function ProductPage() {
                         )}
                         {product.quantity > 0 ? (
                             <form onSubmit={addToCart} noValidate>
-                                <label htmlFor="pd-quantity" className="pd-pg__opt-label pd-pg__quantity-label">
+                                <label
+                                    htmlFor="pd-quantity"
+                                    className=" pd-pg__opt-label pd-pg__quantity-label"
+                                >
                                     Quantity:
                                     <div className="pd-pg__quantity-wrapper">
-                                        <button type='button' className="pd-pg__quantity-btn" onClick={decrement} disabled={desiredQty <= 1}>-</button>
-                                        <input type="number" className="pd-pg__quantity-input" name="pd-quantity" id="pd-quantity"
-                                            max={product.quantity} min={1} onChange={handleDesiredQty} value={desiredQty} />
-                                        <button type="button" className="pd-pg__quantity-btn" disabled={desiredQty >= product.quantity} onClick={increment} >+</button>
+                                        <button
+                                            type="button"
+                                            className="pd-pg__quantity-btn"
+                                            disabled={desiredQty <= 1}
+                                            onClick={decrement}
+                                        >
+                                            -
+                                        </button>
+                                        <input
+                                            type="number"
+                                            className="pd-pg__quantity-input"
+                                            name="pd-quantity"
+                                            id="pd-quantity"
+                                            max={product.quantity}
+                                            min={1}
+                                            onChange={handleDesiredQty}
+                                            value={desiredQty}
+                                        />
+                                        <button
+                                            type="button"
+                                            className="pd-pg__quantity-btn"
+                                            disabled={desiredQty >= product.quantity}
+                                            onClick={increment}
+                                        >
+                                            +
+                                        </button>
                                     </div>
                                 </label>
-                                <button className="pd-pg__btn-card pd-pg__btn-add-cart" type="submit" >Add to Cart</button>
-                                {itemInCart && (
-                                    <motion.div initial={{ scaleY: 0, opacity: 0 }}
+                                <button
+                                    className="pd-pg__btn-cart pd-pg__btn-add-cart"
+                                    type="submit"
+                                >
+                                    Add to Cart
+                                </button>
+                                {itemIsInCart && (
+                                    <motion.div
+                                        initial={{ scaleY: 0, opacity: 0 }}
                                         animate={{ scaleY: 1, originY: 0, opacity: 1 }}
-                                        transition={{ duration: 0.5 }}>
-                                        <Link to="/cart" className="pd-pg__btn-cart pd-pg__btn-checkout">Buy it now</Link>
+                                        transition={{ duration: 0.5 }}
+                                    >
+                                        <Link
+                                            to="/cart"
+                                            className="pd-pg__btn-cart pd-pg__btn-checkout"
+                                        >
+                                            Buy it now
+                                        </Link>
                                     </motion.div>
                                 )}
                                 {errorMessage && (
-                                    <span className="pd-pg__error">{errorMEssage}</span>
+                                    <span className="pd-pg__error">{errorMessage}</span>
                                 )}
                             </form>
                         ) : (
@@ -215,7 +274,7 @@ function ProductPage() {
                         )}
                     </div>
                 </section>
-            </main >
+            </main>
             <section className="pd-lens">
                 <h2 className="pd-lens__title">Purchase Prescription Lenses</h2>
                 <ul className="pd-lens__steps">
@@ -247,5 +306,6 @@ function ProductPage() {
                 <ScrollToTop />
             </section>
         </>
-    )
+    );
 }
+export default ProductPage;
