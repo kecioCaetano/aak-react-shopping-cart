@@ -30,7 +30,23 @@ function AboutPage() {
                     Elevate your eyewear game with SAVANT frames.
                 </p>
             </section>
-            <section></section>
+            <section className="story-main">
+                <ImageWrapper className="story-main__panel panel-1">
+                    <ProgressiveImage src={`${BLOB_URL}/unsplash/frame-13.webp`} placeholder={`${BLOB_URL}/unsplash-compressed/frame-13.webp`}>
+                        {(src, loading) => {
+                            <img src={src} alt="Guy in office wearing glasses and a denim jacket"
+                                className={`story-main__img ${loading && 'img--loading'}`}
+                                loading="lazy"
+                            />
+                        }}
+                    </ProgressiveImage>
+                </ImageWrapper>
+                <div></div>
+                <div></div>
+                <ImageWrapper></ImageWrapper>
+                <ImageWrapper></ImageWrapper>
+                <div></div>
+            </section>
             <section></section>
             <BlogContent></BlogContent>
             <section></section>
