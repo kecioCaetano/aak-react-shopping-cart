@@ -15,7 +15,7 @@ import ProductPageLayout from './layout/ProductPageLayout';
 
 import HomePage from './pages/HomePage';
 import ProductPage from './pages/ProductPage';
-// import AboutPage from './pages/AboutPage';
+import AboutPage from './pages/AboutPage';
 import CartPage from './pages/CartPage';
 // import UnderConstruction from './pages/UnderConstruction';
 
