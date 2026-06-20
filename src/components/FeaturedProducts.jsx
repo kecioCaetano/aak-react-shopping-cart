@@ -42,7 +42,8 @@ function FeaturedProducts() {
                                     <img
                                         src={src}
                                         alt={`${item.title} front profile`}
-                                        className={`fp-product__img${loading && 'img--loading'}`}
+                                        className={`fp-product__img ${loading && 'img--loading'}`}
+
                                         loading="lazy" />
                                 )}
                             </ProgressiveImage>
