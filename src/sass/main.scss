@@ -6,7 +6,7 @@
 @use "nav-bar";
 @use "footer";
 @use "search-panel";
-// @use 'under-construction';
+@use "under-construction";
 @use "img-wrapper";
 @use "img-loading";
 
@@ -31,4 +31,4 @@
 @use "cart_page/cart-row";
 
 // // ABOUT PAGE COMPONENTS
-// @use 'about_page/story';
+@use "about_page/story";

@@ -17,7 +17,7 @@ import HomePage from './pages/HomePage';
 import ProductPage from './pages/ProductPage';
 import AboutPage from './pages/AboutPage';
 import CartPage from './pages/CartPage';
-// import UnderConstruction from './pages/UnderConstruction';
+import UnderConstruction from './pages/UnderConstruction';
 
 import './sass/main.scss';
 
@@ -58,8 +58,8 @@ function RouteSwitch() {
               element={<ProductPage />}
             />
           </Route>
-          {/* <Route path="/about" element={<AboutPage />} />
-          <Route path="*" element={<UnderConstruction />} /> */}
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="*" element={<UnderConstruction />} />
 
 
         </Routes>
