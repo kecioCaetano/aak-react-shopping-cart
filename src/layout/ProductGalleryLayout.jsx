@@ -24,9 +24,9 @@ function ProductGalleryLayout() {
     }, [search])
 
     return (
-        <div className="Screen-product">
+        <div className="screen-product">
             <ProductBanner content={bannerContent} />
-            <div className="product--wrapper">
+            <div className="products--wrapper">
                 <ProductSidebar />
                 <main className="products" ref={productsRef} >
                     <div className="products-sorter">
