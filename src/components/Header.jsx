@@ -38,7 +38,7 @@ function Header() {
           <ImageWrapper className="header__logo-img-wrapper">
             <img
               src={`${BLOB_URL}/logo-black.png`}
-              alt="Savant logo"
+              alt="savant logo"
               className="header__logo-img"
             />
           </ImageWrapper>
